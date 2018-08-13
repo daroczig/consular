@@ -7,7 +7,7 @@
 consular_agent_services()
 }
 \value{
-\code{list}
+\code{data.table} with a service in each row
 }
 \description{
 List services registered with the local agent

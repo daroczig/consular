@@ -38,12 +38,16 @@ consular_agent_reload <- function() {
 
 
 #' List services registered with the local agent
-#' @return \code{list}
+#' @return \code{data.table} with a service in each row
 #' @export
 #' @importFrom httr GET content
+#' @importFrom data.table rbindlist as.data.table
 #' @references \url{https://www.consul.io/api/agent/service.html#list-services}
 consular_agent_services <- function() {
-    content(GET(file.path(consular$agent_url, consular$version, 'agent', 'services')))
+    services <- content(GET(file.path(consular$agent_url, consular$version, 'agent', 'services')))
+    rbindlist(lapply(services, function(service) {
+        suppressWarnings(as.data.table(service))
+    }), fill = TRUE)
 }
 
 
