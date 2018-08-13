@@ -1,0 +1,13 @@
+Package: consular
+Type: Package
+Title: Consul agent client
+Version: 1.0
+Date: 2018-08-13
+Author: Gergely Daroczi <daroczig@rapporter.net>
+Maintainer: Gergely Daroczi <daroczig@rapporter.net>
+Description: Client to HashiCorp's Consul
+License: AGPL
+RoxygenNote: 6.0.1
+Imports:
+  httr,
+  data.table
