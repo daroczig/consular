@@ -2,7 +2,7 @@
 % Please edit documentation in R/agent.R
 \name{consular_agent_members}
 \alias{consular_agent_members}
-\title{List consul agent members}
+\title{List members the local agent sees in the cluster gossip pool}
 \usage{
 consular_agent_members()
 }
@@ -10,5 +10,8 @@ consular_agent_members()
 \code{data.table} with a member in each row
 }
 \description{
-List consul agent members
+List members the local agent sees in the cluster gossip pool
+}
+\references{
+\url{https://www.consul.io/api/agent.html#list-members}
 }
