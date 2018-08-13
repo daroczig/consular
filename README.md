@@ -7,3 +7,4 @@ Currently supported features:
 - read and reload the configuration of the local agent
 - read services registered with the local agent
 - register new service to the local agent
+- deregister a service from the local agent

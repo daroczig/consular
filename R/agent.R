@@ -43,6 +43,9 @@ consular_agent_reload <- function() {
 #' @importFrom httr GET content
 #' @importFrom data.table rbindlist as.data.table
 #' @references \url{https://www.consul.io/api/agent/service.html#list-services}
+#' @examples \dontrun{
+#' consular_agent_services()
+#' }
 consular_agent_services <- function() {
     services <- content(GET(file.path(consular$agent_url, consular$version, 'agent', 'services')))
     rbindlist(lapply(services, function(service) {
@@ -54,7 +57,7 @@ consular_agent_services <- function() {
 #' Register a new service to the local agent
 #' @export
 #' @importFrom httr PUT content
-#' @importFrom data.table rbindlist as.data.table
+#' @importFrom jsonlite toJSON
 #' @references \url{https://www.consul.io/api/agent/service.html#register-service}
 #' @param payload list describing the service
 #' @examples \dontrun{
@@ -66,7 +69,21 @@ consular_agent_services <- function() {
 #' ))
 #' }
 consular_agent_register_service <- function(payload) {
-    content(PUT(
+    invisible(content(PUT(
         file.path(consular$agent_url, consular$version, 'agent', 'service', 'register'),
-        body = toJSON(payload, auto_unbox = TRUE)))
+        body = toJSON(payload, auto_unbox = TRUE))))
+}
+
+
+#' Deregister a new service from the local agent
+#' @export
+#' @importFrom httr PUT content
+#' @references \url{https://www.consul.io/api/agent/service.html#deregister-service}
+#' @param id string
+#' @examples \dontrun{
+#' consular_agent_deregister_service('ssh-on-devbox')
+#' }
+consular_agent_deregister_service <- function(id) {
+    invisible(content(PUT(
+        file.path(consular$agent_url, consular$version, 'agent', 'service', 'deregister', id))))
 }
