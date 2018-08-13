@@ -35,3 +35,34 @@ consular_agent_configuration <- function() {
 consular_agent_reload <- function() {
     invisible(content(PUT(file.path(consular$agent_url, consular$version, 'agent', 'reload'))))
 }
+
+
+#' List services registered with the local agent
+#' @return \code{list}
+#' @export
+#' @importFrom httr GET content
+#' @references \url{https://www.consul.io/api/agent/service.html#list-services}
+consular_agent_services <- function() {
+    content(GET(file.path(consular$agent_url, consular$version, 'agent', 'services')))
+}
+
+
+#' Register a new service to the local agent
+#' @export
+#' @importFrom httr PUT content
+#' @importFrom data.table rbindlist as.data.table
+#' @references \url{https://www.consul.io/api/agent/service.html#register-service}
+#' @param payload list describing the service
+#' @examples \dontrun{
+#' consular_agent_register_service(list(
+#'   Name = 'ssh',
+#'   ID = 'ssh-on-devbox',
+#'   Address = 'localhost',
+#'   Port = 22L
+#' ))
+#' }
+consular_agent_register_service <- function(payload) {
+    content(PUT(
+        file.path(consular$agent_url, consular$version, 'agent', 'service', 'register'),
+        body = toJSON(payload, auto_unbox = TRUE)))
+}
