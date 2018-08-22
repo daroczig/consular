@@ -12,6 +12,11 @@ consular_agent_services()
 \description{
 List services registered with the local agent
 }
+\examples{
+\dontrun{
+consular_agent_services()
+}
+}
 \references{
 \url{https://www.consul.io/api/agent/service.html#list-services}
 }

@@ -2,7 +2,7 @@
 #' @return \code{data.table} with a member in each row
 #' @export
 #' @importFrom httr GET content
-#' @importFrom data.table rbindlist as.data.table
+#' @importFrom data.table rbindlist as.data.table setnames
 #' @references \url{https://www.consul.io/api/agent.html#list-members}
 consular_agent_members <- function() {
     members <- content(GET(file.path(consular$agent_url, consular$version, 'agent', 'members')))
