@@ -20,6 +20,23 @@ consular_agent_register_service(list(
   Address = 'localhost',
   Port = 22L
 ))
+
+## also set a health-check eg for gRPC
+port <- 35829
+consular_agent_register_service(list(
+  Name = 'test-grpc',
+  ID = 'test-grpc-on-localhost',
+  Address = 'localhost',
+  Port = port,
+  Check = list(
+    id = 'test-grpc-health-check',
+    name = 'test-grpc health check',
+    grpc = paste('127.0.0.1', port, sep = ':'),
+    interval = '5s',
+    grpc_use_tls = FALSE,
+    service_id = 'test-grpc-on-localhost'
+  )
+))
 }
 }
 \references{
