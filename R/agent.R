@@ -99,6 +99,9 @@ consular_agent_register_service <- function(payload) {
 #' @param id string
 #' @examples \dontrun{
 #' consular_agent_deregister_service('ssh-on-devbox')
+#'
+#' ## deregister all services of the local agent
+#' sapply(consular_agent_services()$ID, consular_agent_deregister_service)
 #' }
 consular_agent_deregister_service <- function(id) {
     invisible(content(PUT(

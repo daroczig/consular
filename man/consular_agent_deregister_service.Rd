@@ -15,6 +15,9 @@ Deregister a new service from the local agent
 \examples{
 \dontrun{
 consular_agent_deregister_service('ssh-on-devbox')
+
+## deregister all services of the local agent
+sapply(consular_agent_services()$ID, consular_agent_deregister_service)
 }
 }
 \references{
